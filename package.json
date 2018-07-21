@@ -1,0 +1,41 @@
+{
+    "name": "electron",
+    "appId": "com.klario.guerrini",
+    "homepage": "https://cloudmpower.com",
+    "devDependencies": {
+        "electron": "*",
+        "electron-builder": "*"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "electron-push-receiver": "^2.0.0"
+    },
+    "scripts": {
+        "start": "electron .",
+        "winBuild": "electron-builder --win",
+        "linuxBuild": "electron-builder --linux",
+        "macBuild": "electron-builder --mac"
+    },
+    "main": "main.js",
+    "version": "1.0.0",
+    "license": "Proprietary",
+    "description": "Electron App",
+    "author": "Manju",
+    "build": {
+        "win": {
+            "target": "msi",
+            "icon": "app-logo.png"
+        },
+        "linux": {
+            "target": "deb",
+            "icon": "loader-logo.png"
+        },
+        "mac": {
+            "target": "dmg",
+            "icon": "loader-logo.png"
+        }
+    },
+    "_moduleAlias": {
+        "@fcm": "libraries/fcm"
+    }
+}

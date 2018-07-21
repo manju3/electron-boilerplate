@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./firebase/fcm_handler.js"></script>
+    <script>
+        function initiate() {
+            dispatchEvent(new Event("REGISTER_FOR_DESKTOP_NOTIFICATION"));
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <button onclick="initiate()">Click</button>
+    </div>
+</body>
+
+</html>
