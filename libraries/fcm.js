@@ -27,7 +27,10 @@ let showNotification = function (fcmNotification) {
 //=======================================
 let registerFCMListeners = function () {
   ipcRenderer.on(NOTIFICATION_SERVICE_STARTED, (_, token) => {
-    console.log("FCM Service started", token);
+   // console.log("FCM Service started", token);
+   let evt = new CustomEvent("TOKEN_GENERATED");
+   evt.token = token;
+   dispatchEvent(evt);
   });
 
   ipcRenderer.on(NOTIFICATION_SERVICE_ERROR, (_, error) => {
@@ -35,8 +38,10 @@ let registerFCMListeners = function () {
   });
 
   ipcRenderer.on(TOKEN_UPDATED, (_, token) => {
-    console.log('token updated', token);
-    dispatchEvent(new Event("TOKEN_GENERATED"))
+   // console.log('token updated', token);
+   let evt = new CustomEvent("TOKEN_GENERATED");
+   evt.token = token;
+   dispatchEvent(evt)
   });
 
   ipcRenderer.on(NOTIFICATION_RECEIVED, (_, serverNotificationPayload) => {
