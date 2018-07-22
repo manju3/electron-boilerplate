@@ -35,8 +35,5 @@
             "target": "dmg",
             "icon": "loader-logo.png"
         }
-    },
-    "_moduleAlias": {
-        "@fcm": "libraries/fcm"
     }
 }

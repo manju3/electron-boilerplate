@@ -27,10 +27,10 @@ let showNotification = function (fcmNotification) {
 //=======================================
 let registerFCMListeners = function () {
   ipcRenderer.on(NOTIFICATION_SERVICE_STARTED, (_, token) => {
-   // console.log("FCM Service started", token);
-   let evt = new CustomEvent("TOKEN_GENERATED");
-   evt.token = token;
-   dispatchEvent(evt);
+    // console.log("FCM Service started", token);
+    let evt = new CustomEvent("TOKEN_GENERATED");
+    evt.token = token;
+    dispatchEvent(evt);
   });
 
   ipcRenderer.on(NOTIFICATION_SERVICE_ERROR, (_, error) => {
@@ -38,26 +38,24 @@ let registerFCMListeners = function () {
   });
 
   ipcRenderer.on(TOKEN_UPDATED, (_, token) => {
-   // console.log('token updated', token);
-   let evt = new CustomEvent("TOKEN_GENERATED");
-   evt.token = token;
-   dispatchEvent(evt)
+    // console.log('token updated', token);
+    let evt = new CustomEvent("TOKEN_GENERATED");
+    evt.token = token;
+    dispatchEvent(evt)
   });
 
   ipcRenderer.on(NOTIFICATION_RECEIVED, (_, serverNotificationPayload) => {
-
+    if (localStorage.getItem("DESKTOP_NOTIFICATION") === "true")
+      showNotification(serverNotificationPayload);
   });
 }
 //=====================================================
-function registerAppListeners() {
-
-}
-
+registerFCMListeners();
 //==============================================
 
 let init = function (senderId) {
-  registerAppListeners();
-  registerFCMListeners();
+  if (localStorage.getItem("DESKTOP_NOTIFICATION") === null)
+    localStorage.setItem("DESKTOP_NOTIFICATION", "false");
   ipcRenderer.send(START_NOTIFICATION_SERVICE, senderId);
 }
 
