@@ -11,6 +11,7 @@ const {
 
 //==============================================
 let showNotification = function (fcmNotification) {
+  console.log("fcm",fcmNotification);
   if (fcmNotification.notification.body) {
     let myNotification = new Notification(fcmNotification.notification.title, {
       body: fcmNotification.notification.body
@@ -55,8 +56,8 @@ registerFCMListeners();
 
 let init = function (senderId) {
   if (localStorage.getItem("DESKTOP_NOTIFICATION") === null)
-    localStorage.setItem("DESKTOP_NOTIFICATION", "false");
+    localStorage.setItem("DESKTOP_NOTIFICATION", "true");
   ipcRenderer.send(START_NOTIFICATION_SERVICE, senderId);
-}
+} 
 
 module.exports.init = init;

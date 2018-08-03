@@ -1,7 +1,8 @@
 (function () {
-    const senderId = "685021518799";
+    let senderId = "1042218093345";
+    let projectId = "";
+    let baseURL = "https://apps.klario.net";
     const comServerApi = "/comserver/notification/setting/add";
-    const baseURL = "https://www.klario.tech";
     const { machineId } = require("node-machine-id");
     const { init } = require("./firebase/fcm");
     const axios = require("axios");
@@ -13,15 +14,17 @@
             "isRegistered": true,
             "notificationDeviceType": "Browser",
             "notificationDeviceId": mid,
-            "projectId": "klario-35f61",
+            "projectId": projectId,
             "registrationId": token
-        })
+        });
     }
     //===========================================================
 
     window.addEventListener("REGISTER_FOR_DESKTOP_NOTIFICATION", function (evt) {
         if(evt.baseURL)
         baseURL = evt.baseURL;
+        senderId = evt.senderId;
+        projectId = evt.projectId;
         init(senderId);
     });
     window.addEventListener("ENABLE_DESKTOP_FCM", function () {
